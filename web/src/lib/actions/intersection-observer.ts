@@ -13,7 +13,9 @@ type OnIntersectCallback = (entryOrElement: IntersectionObserverEntry | HTMLElem
 type OnSeperateCallback = (element: HTMLElement) => unknown;
 type IntersectionObserverActionProperties = {
   key?: string;
+  /** Function to execute when the element leaves the viewport */
   onSeparate?: OnSeperateCallback;
+  /** Function to execute when the element enters the viewport */
   onIntersect?: OnIntersectCallback;
 
   root?: Element | Document | null;
@@ -123,7 +125,12 @@ function _intersectionObserver(
     },
   };
 }
-
+/**
+ * Monitors an element's visibility in the viewport and calls functions when it enters or leaves (based on a threshold).
+ * @param element
+ * @param properties One or multiple configurations for the IntersectionObserver(s)
+ * @returns
+ */
 export function intersectionObserver(
   element: HTMLElement,
   properties: IntersectionObserverActionProperties | IntersectionObserverActionProperties[],
